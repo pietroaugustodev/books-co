@@ -1,0 +1,56 @@
+#pag-adm-login {
+    // background-image: linear-gradient();
+    background-color: #37349F;
+    height: 100vh;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    main {
+        background-image: url("../../../../public/assets/images/logo.png");
+        padding: 50px 80px;
+        display: flex;
+        flex-direction: column;
+        gap: 20px;
+
+        #apresentacao {
+            color: #463F3F;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+
+            img {
+                width: 75px;
+            }
+        }
+
+        #campos {
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+            font-weight: 500;
+            color: #463F3F;
+
+            button {
+                width: 100px;
+                height: 40px;
+                align-self: self-end;
+                background: white;
+                border: 2px gray solid;
+                color: #383131;
+                font-size: 12.5px;
+                font-weight: 700;
+            }
+
+            div input {
+                height: 35px;
+                border: 1.5px gray solid;
+            }
+
+            div input {
+                // border: none;
+            }
+        }
+    }
+}
