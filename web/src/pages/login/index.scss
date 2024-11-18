@@ -1,0 +1,68 @@
+#pag-adm-login {
+    background-image: linear-gradient(to right, #14133F, #37349F, #14133F);
+    height: 100vh;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    main {
+        background-color: white;
+        width: 380px;
+        height: 380px;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        gap: 40px;
+        position: relative;
+
+        img {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            opacity: 0.07;
+        }
+        
+        #apresentacao {
+            color: #37349F
+            ;
+        }
+        
+        #campos {
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+            font-weight: 500;
+            color: #463F3F;
+            z-index: 5;
+
+            button {
+                width: 100px;
+                height: 40px;
+                align-self: self-end;
+                background: white;
+                border: 1.5px gray solid;
+                color: #463F3F;
+                border-radius: 3px;
+                font-size: 12.5px;
+                font-weight: 700;
+            }
+
+            div input {
+                height: 35px;
+                width: 200px;
+                border: 1px gray solid;
+                border-radius: 3px;
+                background-color: transparent;
+                font-size: 15.5px;
+                padding-left: 5px;
+                text-align: center;
+            }
+
+            div input:focus {
+                outline: 0;
+            }
+        }
+    }
+}
