@@ -1,25 +1,46 @@
-import { useState } from "react";
+import { useRef, useState } from "react";
 import "./index.scss"
 import { Logar } from "../../api/usuarioApi";
-
+import { toast } from "react-toastify"
+import LoadingBar from "react-top-loading-bar"
+import { useNavigate } from "react-router-dom";
 
 function Login(){
     const [email, setEmail] = useState("");
     const [senha, setSenha] = useState("");
+    const [carregando, setCarregando] = useState(false);
+    const ref = useRef();
+    const navigate = useNavigate();
 
-    
+
     async function login(){
+        ref.current.continuousStart()
+        setCarregando(true)
         try{
             const resp = await Logar(email, senha)
-            console.log("logou");
+            toast.success("Logado com sucesso", {
+                autoClose: 1300
+            }) 
             
+            setTimeout(() => {
+                navigate("/home")
+            }, 2000)
+
         } catch(err){
-            console.log(err)
+            setCarregando(false)
+            ref.current.complete()
+            toast.error(err.response.data.erro)
         }
+    }
+
+    function verificarTecla(e){
+        if(e.key == "Enter") 
+            login()
     }
     
     return(
         <div id="pag-adm-login">
+            <LoadingBar color="#fff" ref={ref}/>
             <main>
                 <img src="/assets/images/logo.png" alt="logo" />
                 <article id="apresentacao">
@@ -31,6 +52,7 @@ function Login(){
                         <input 
                             type="text" 
                             onChange={(e) => setEmail(e.target.value)}
+                            onKeyDown={verificarTecla}
                         />
                     </div>
                     <div>
@@ -38,9 +60,13 @@ function Login(){
                         <input 
                             type="password"
                             onChange={(e) => setSenha(e.target.value)}
+                            onKeyDown={verificarTecla}
                         />
                     </div>
-                    <button onClick={login}>ENTRAR</button>
+                    <button 
+                        onClick={login}
+                        disabled={carregando}
+                    > ENTRAR </button>
                 </article>
             </main>
         </div>
