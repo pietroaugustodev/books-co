@@ -1,0 +1,15 @@
+#pag-home {
+    display: flex;
+    main {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        height: 91vh;
+
+        img {
+            width: 60%;
+            height: 60%;
+            opacity: 0.4;
+        }
+    }
+}

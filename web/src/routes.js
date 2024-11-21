@@ -6,8 +6,8 @@ function Rotas(){
     return(
         <BrowserRouter>
             <Routes>
-                <Route exact={true} path="/" element={<Login />}/>
-                <Route path="/home" element={<Home />} />
+                <Route exact={true} path="/login" element={<Login />}/>
+                <Route path="/" element={<Home />} />
             </Routes>
         </BrowserRouter>
     )

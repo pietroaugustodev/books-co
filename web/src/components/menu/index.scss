@@ -1,0 +1,48 @@
+#comp-menu {
+    background-color: #303030;
+    height: 100vh;
+    width: 270px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+
+    #info-empresa {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        color: white;
+        gap: 20px;
+        padding-top: 8px;
+    }
+
+    nav {
+        display: flex;
+        flex-direction: column;
+        gap: 20px;
+        margin-bottom: 200px;
+        article {
+            display: flex;
+            color: white;
+            align-items: center;
+            padding-left: 60px;
+            gap: 20px;
+
+            p {
+                font-weight: 500;
+            }
+        }
+    }
+
+    footer {
+        display: flex;
+        align-items: center;
+        padding-left: 60px;
+        color: white;
+        font-weight: 500;
+        gap: 20px;
+        padding-bottom: 50px;
+        img {
+            transform: rotate(180deg);
+        }
+    }
+}
