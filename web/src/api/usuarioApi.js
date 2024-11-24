@@ -12,7 +12,5 @@ export async function Logar(email, senha){
         "senha": senha
     })
 
-    console.log(resp)
-
     return resp.data;
 }

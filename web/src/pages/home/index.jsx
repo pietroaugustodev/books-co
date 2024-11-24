@@ -6,7 +6,7 @@ function Home(){
     return(
         <div id="pag-home">
             <Menu />
-            <div>
+            <div id="tela">
                 <Cabecalho />
                 <main>
                     <img src="/assets/images/logo.svg" alt="logo" />

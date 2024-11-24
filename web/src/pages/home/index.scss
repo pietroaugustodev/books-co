@@ -1,15 +1,27 @@
 #pag-home {
     display: flex;
-    main {
+    width: 100vw;
+    height: 100vh;
+    
+    #tela {
         display: flex;
-        align-items: center;
-        justify-content: center;
-        height: 91vh;
-
-        img {
-            width: 60%;
-            height: 60%;
-            opacity: 0.4;
+        flex-direction: column;
+        justify-content: space-between;
+        flex-grow: 1;
+        
+        main {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            height: 92vh;
+            background-color: #F5F6FA;
+    
+            img {
+                width: 60%;
+                height: 60%;
+                opacity: 0.4;
+            }
+    
         }
     }
 }

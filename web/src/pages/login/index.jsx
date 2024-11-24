@@ -4,6 +4,7 @@ import { Logar } from "../../api/usuarioApi";
 import { toast } from "react-toastify"
 import LoadingBar from "react-top-loading-bar"
 import { useNavigate } from "react-router-dom";
+import storage from "local-storage"
 
 function Login(){
     const [email, setEmail] = useState("");
@@ -22,6 +23,8 @@ function Login(){
                 autoClose: 1300
             }) 
             
+            storage("usuario-logado", resp)
+
             setTimeout(() => {
                 navigate("/home")
             }, 2000)
