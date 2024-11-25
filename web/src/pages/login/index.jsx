@@ -26,7 +26,7 @@ function Login(){
             storage("usuario-logado", resp)
 
             setTimeout(() => {
-                navigate("/home")
+                navigate("/")
             }, 2000)
 
         } catch(err){

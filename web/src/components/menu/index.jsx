@@ -1,6 +1,13 @@
+import { Link } from "react-router-dom";
 import "./index.scss";
 
-function Menu() {
+function Menu(props) {
+
+    function verificarMenuSelecionado(menu){
+        if(props.menuSelecionado == menu)
+            return "selecionado";
+    }
+
 
     return(
         <div id="comp-menu">
@@ -10,20 +17,20 @@ function Menu() {
             </section>
 
             <nav>
-                <article>
+                <Link to="/" id={verificarMenuSelecionado("home")}>
                     <img src="/assets/images/icon-home.svg" alt="icon-home" />
                     <p>Home</p>
-                </article>
+                </Link>
 
-                <article>
+                <Link to="/cadastrar" id={verificarMenuSelecionado("cadastrar")}>
                     <img src="/assets/images/icon-add.svg" alt="icon-add" />
                     <p>Cadastrar</p>
-                </article>
+                </Link>
 
-                <article>
+                <Link to="/consultar" id={verificarMenuSelecionado("consultar")}>
                     <img src="/assets/images/icon-list.svg" alt="icon-list" />
                     <p>Consultar</p>
-                </article>
+                </Link>
             </nav>
 
             <footer>
