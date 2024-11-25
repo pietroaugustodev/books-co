@@ -1,11 +1,16 @@
+import { useEffect, useState } from "react";
 import "./index.scss";
 import storage from "local-storage";
 
 
 function Cabecalho() {
 
-    const nomeUsuario = storage("usuario-logado").nome
+    const [nomeUsuario, setNomeUsuario] = useState(" ");
 
+    useEffect(() => {
+        if(storage("usuario-logado"))
+            setNomeUsuario(storage("usuario-logado").nome)
+    }, [])
 
     return(
         <div id="comp-cabecalho">

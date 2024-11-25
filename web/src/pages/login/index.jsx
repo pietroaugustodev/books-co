@@ -1,4 +1,4 @@
-import { useRef, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import "./index.scss"
 import { Logar } from "../../api/usuarioApi";
 import { toast } from "react-toastify"
@@ -40,6 +40,11 @@ function Login(){
         if(e.key == "Enter") 
             login()
     }
+
+    useEffect(() => {
+        if(storage("usuario-logado"))
+            navigate("/")
+    }, [])
     
     return(
         <div id="pag-adm-login">

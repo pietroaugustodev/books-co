@@ -34,6 +34,10 @@
             }
         }
 
+        a:hover {
+            background-color: #212169;
+        }
+
         #selecionado {
             background-color: #3936CD;
         }
@@ -46,9 +50,11 @@
         color: white;
         font-weight: 500;
         gap: 20px;
+        cursor: pointer;
         padding-bottom: 50px;
         img {
             transform: rotate(180deg);
         }
     }
+
 }

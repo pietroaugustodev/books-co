@@ -1,13 +1,26 @@
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import "./index.scss";
+import storage from "local-storage"
+import { useEffect } from "react";
 
 function Menu(props) {
+
+    const navigate = useNavigate()
 
     function verificarMenuSelecionado(menu){
         if(props.menuSelecionado == menu)
             return "selecionado";
     }
 
+    function deslogar(){
+        storage.remove("usuario-logado");
+        navigate("/login");
+    }
+
+    useEffect(( ) => {
+        if(!storage("usuario-logado"))
+            navigate("/login");
+    }, [])
 
     return(
         <div id="comp-menu">
@@ -33,7 +46,7 @@ function Menu(props) {
                 </Link>
             </nav>
 
-            <footer>
+            <footer onClick={deslogar}>
                 <img src="/assets/images/icon-logout.svg" alt="icon-logout" />
                 <p>Sair</p>
             </footer>
