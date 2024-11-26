@@ -1,0 +1,98 @@
+#pag-cadastrar {
+    display: flex;
+    min-height: 100vh;
+
+    #tela {
+        display: flex;
+        flex-direction: column;
+        flex-grow: 1;
+        
+        main {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            height: 92vh;
+            padding: 50px;
+            background-color: #F5F6FA;
+
+           form {
+                display: flex;
+                flex-direction: column;
+                height: 80%;
+                background-color: #fff;
+                border: 1px solid black;
+                padding: 20px 30px;
+                gap: 40px;
+
+                #titulo {
+                    display: flex;
+                    align-items: center;
+                    color: #646464;
+                    font-weight: 500;
+                    font-size: 20px;
+                    gap: 10px;
+
+                    > div {
+                        width: 8px;
+                        height: 35px;
+                        background-color: #3936CD;
+                        border-radius: 10px;
+                    }
+                }
+                #campos {
+                    display: flex;
+                    flex-direction: row;
+                    flex-wrap: wrap;
+                    justify-content: center;
+                    // align-items: center;
+                    gap: 50px;
+
+                    input{
+                        height: 28px;
+                    }
+
+                    input:focus {
+                        outline: none;
+                    }
+                    
+                    
+
+                    section {
+                        div {
+                            display: flex;
+                            align-items: center;
+                            gap: 20px;
+                            justify-content: flex-end;
+
+                            label {
+                                font-weight: 500;
+                                color: #888888;
+                            }
+                        }
+                    }
+
+                    #s1 {
+                        div {
+                            display: flex;
+                            align-items: center;
+                            justify-content: center;
+                            height: 220px;
+                            width: 180px;
+                            border: 1px solid #888888;
+
+                            input {
+                                display: none;
+                            }
+                        }
+                    }
+
+                    #s2 {
+                        display: flex;
+                        flex-direction: column;
+                        gap: 80px;
+                    }
+                }
+           }
+        }
+    }
+}
