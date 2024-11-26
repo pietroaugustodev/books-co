@@ -1,0 +1,27 @@
+#pag-not-found {
+    display: flex;
+    height: 100vh;
+
+    #tela {
+        display: flex;
+        flex-direction: column;
+        flex-grow: 1;
+
+        main {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-direction: column;
+            gap: 40px;
+            height: 91vh;
+            background-color: #F5F6FA;
+            color: #646464;
+
+            img {
+                width: 60%;
+                height: 60%;
+                opacity: 0.5;
+            }
+        }
+    }
+}
