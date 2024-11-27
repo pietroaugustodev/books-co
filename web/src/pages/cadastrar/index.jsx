@@ -25,71 +25,113 @@ function Cadastrar() {
 
                             <section id="s2">
                                 <article>
-
-                                    <div>
-                                        <label htmlFor="">Nome: </label>
-                                        <input type="text" placeholder="Nome do Livro" />
+                                    <div className="campo">
+                                        <div className="nomes-campos">
+                                            <label htmlFor="">Nome: </label>
+                                        </div>
+                                        <div >
+                                            <input type="text" placeholder="Nome do Livro" />
+                                        </div>
+                                    </div>
+                                    
+                                    <div className="campo">
+                                        <div className="nomes-campos">
+                                            <label htmlFor="">Autor: </label>
+                                        </div>
+                                        <div >
+                                            <input type="text" placeholder="Nome do Autor"/>
+                                        </div>
                                     </div>
 
-                                    <div>
-                                        <label htmlFor="">Autor: </label>
-                                        <input type="text" placeholder="Nome do Autor"/>
+                                    <div className="campo">
+                                        <div className="nomes-campos">
+                                            <label htmlFor="">Idioma: </label>
+                                        </div>
+                                        <div >
+                                            <select name="" id="">
+                                                <option value="">Selecione</option>
+                                            </select>
+                                        </div>
                                     </div>
 
-                                    <div>
-                                        <label htmlFor="">Idioma: </label>
-                                        <select name="" id="">
-                                            <option value="">Selecione</option>
-                                        </select>
+                                    <div className="campo">
+                                        <div className="nomes-campos">
+                                            <label htmlFor="">ISBN: </label>
+                                        </div>
+                                        <div >
+                                            <input type="text" placeholder="Número do ISBN"/>
+                                        </div>
                                     </div>
-
-                                    <div>
-                                        <label htmlFor="">ISBN: </label>
-                                        <input type="text" placeholder="Número do ISBN"/>
-                                    </div>
+                                    
                                 </article>
 
                                 <article>
-
-                                    <div>
-                                        <label htmlFor="">Qtd. Páginas: </label>                                
-                                        <input type="number" />
+                                    <div className="campo">
+                                        <div  className="nomes-campos">
+                                            <label htmlFor="">Qtd. Páginas: </label>                                
+                                        </div>
+                                        <div >
+                                            <input type="text" placeholder="0"/>
+                                        </div>
                                     </div>
 
-                                    <div>
-                                        <label htmlFor="">Preço: </label>
-                                        <input type="text" />
+                                    <div className="campo">
+                                        <div  className="nomes-campos">
+                                            <label htmlFor="">Preço: </label>
+                                        </div>
+                                        <div >
+                                            <input type="text" placeholder="0"/>
+                                        </div>
                                     </div>
-                                    
-                                    <div>
-                                        <input type="checkbox" />
-                                        <label htmlFor="">Disponível</label>
+
+                                    <div className="campo" id="campo-disponivel">
+                                        <div className="nomes-campos" id="campo">
+                                            <input type="checkbox" />
+                                            <label htmlFor="">Disponível</label>
+                                        </div>
                                     </div>
+
                                 </article>
                             </section>
 
                             <section id="s3">
-                                <div>
-                                    <label htmlFor="">Editora: </label>
-                                    <input type="text" placeholder="Nome da Editora"/>
-                                </div>
-
-                                <div>
-                                    <label htmlFor="">Edição: </label>
-                                    <input type="text" placeholder="Versão da Edição" />
-                                </div>
-
-                                <div>
-                                    <label htmlFor="">Publicação: </label>
-                                    <input type="date" name="" id="" />
-                                </div>
-
-                                <div>
-                                    <label htmlFor="">Sinopse: </label>
-                                    <textarea name="" id="" placeholder="Sinopse do livro"></textarea>
-                                </div>
+                                <article className="campo">
+                                    <div className="nomes-campos">
+                                        <label htmlFor="">Editora: </label>
+                                    </div>
+                                    <div >
+                                        <input type="text" placeholder="Nome da Editora"/>
+                                    </div>
+                                </article>
                                 
-                                <button>Salvar</button>
+                                <article className="campo">
+                                    <div className="nomes-campos">
+                                        <label htmlFor="">Edição: </label>
+                                    </div>
+                                    <div >
+                                        <input type="text" placeholder="Versão da Edição" />
+                                    </div>
+                                </article>
+
+                                <article className="campo">
+                                    <div className="nomes-campos">
+                                        <label htmlFor="">Publicação: </label>
+                                    </div>
+                                    <div >
+                                        <input type="date" name="" id="" />
+                                    </div>
+                                </article>
+
+                                <article className="campo">
+                                    <div id="sinopse"  className="nomes-campos">
+                                        <label htmlFor="">Sinopse: </label>
+                                    </div>
+                                    <div >
+                                        <textarea name="" id="" placeholder="Sinopse do livro"></textarea>
+                                    </div>
+                                </article>
+                                
+                                <button>SALVAR</button>
                             </section>
                         </div>
                     </form>
