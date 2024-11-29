@@ -1,9 +1,23 @@
+import { useState } from "react";
 import Cabecalho from "../../components/cabecalho";
 import Menu from "../../components/menu";
 import "./index.scss";
+import { useAsyncError } from "react-router-dom";
 
 
 function Cadastrar() {
+    
+    const [img, setImg] = useState("");
+    const [nome, setNome] = useState("");
+    const [autor, setAutor] = useState("");
+    const [idioma, setIdioma] = useState("");
+    const [sinopse, setSinopse] = useState("");
+    const [editora, setEditora] = useState("");
+    const [isbn, setIsbn] = useState(null);
+    const [publicacao, setPublicacao] = useState("")
+    const [disponivel, setDisponivel ] = useState(null);
+    
+    
     return(
         <div id="pag-cadastrar">
             <Menu menuSelecionado="cadastrar" />
