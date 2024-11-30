@@ -26,24 +26,6 @@ usuarioEndpoints.post('/usuario', async (req, resp) => {
 })
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 usuarioEndpoints.post("/livro", async (req, resp) => {
     try {
 
@@ -58,7 +40,7 @@ usuarioEndpoints.post("/livro", async (req, resp) => {
         if(!infoLivro.sinopse) throw new Error ("Sinopse do livro não identificada.");
         if(!infoLivro.publicacao) throw new Error ("Data de publicação do livro não identificada.");
         if(!infoLivro.idioma) throw new Error ("Idioma do livro não identificado.");
-        if(!infoLivro.disponivel) throw new Error ("Disponibilidade do livro não identificada.");
+        if(infoLivro.disponivel == undefined || infoLivro.disponivel == null) throw new Error ("Disponibilidade do livro não identificada.");
         if(!infoLivro.qtdPaginas) throw new Error ("Quantidade de páginas não identificada.")
         if(!infoLivro.preco) throw new Error ("Preço do livro não identificado.");
 
@@ -72,26 +54,6 @@ usuarioEndpoints.post("/livro", async (req, resp) => {
         })
     }
 })
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 export default usuarioEndpoints;

@@ -15,7 +15,7 @@
             padding: 50px;
             background-color: #F5F6FA;
 
-           form {
+           #form {
                 display: flex;
                 flex-direction: column;
                 height: 90%;
@@ -81,7 +81,7 @@
                             input,::placeholder {
                                 font-weight: 500;
                                 font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
-                                color: #CCCCCC;
+                                color: #bebcbc;
                                 font-size: 15px;
                             }
 
@@ -89,7 +89,7 @@
                                 font-weight: 500;
                                 font-size: 15px;
                                 font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
-                                color: #CCCCCC;
+                                color: #bebcbc;
                             }
 
                             input, textarea, select:focus {
@@ -145,7 +145,7 @@
                                 width: 215px;
                                 font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
                                 font-weight: 500;
-                                color: #CCCCCC;
+                                color: #bebcbc;
                             }
                         }
                     }
@@ -161,7 +161,7 @@
                             padding-top: 10px;
                             font-weight: 500;
                             font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
-                            color: #CCCCCC;
+                            color: #bebcbc;
                         }
 
                         #sinopse {

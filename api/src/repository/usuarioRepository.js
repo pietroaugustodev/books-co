@@ -12,42 +12,8 @@ export async function login(email, senha){
     
     const [resp] = await conexao.query(comandoSql, [email, senha])
     
-    return resp[0]
+    return resp[0];
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 
@@ -56,8 +22,6 @@ export async function cadastrarLivro(infoLivro) {
                                VALUES        (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?);`;
 
     const [resp] = await conexao.query(comandoSql, [infoLivro.idUsuario, infoLivro.nome, infoLivro.autor, infoLivro.isbn, infoLivro.editora, infoLivro.edicao, infoLivro.sinopse, infoLivro.publicacao, infoLivro.idioma, infoLivro.disponivel, infoLivro.qtdPaginas, infoLivro.preco])
-    console.log(resp);
-
 
     return resp.insertId;
 }

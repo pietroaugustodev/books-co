@@ -2,7 +2,9 @@ import { useState } from "react";
 import Cabecalho from "../../components/cabecalho";
 import Menu from "../../components/menu";
 import "./index.scss";
-import { useAsyncError } from "react-router-dom";
+import { toast } from "react-toastify"
+import { CadastrarLivro } from "../../api/usuarioApi";
+import storage from "local-storage"
 
 
 function Cadastrar() {
@@ -13,18 +15,61 @@ function Cadastrar() {
     const [idioma, setIdioma] = useState("");
     const [sinopse, setSinopse] = useState("");
     const [editora, setEditora] = useState("");
-    const [isbn, setIsbn] = useState(null);
+    const [isbn, setIsbn] = useState();
     const [publicacao, setPublicacao] = useState("")
-    const [disponivel, setDisponivel ] = useState(null);
-    
-    
+    const [disponivel, setDisponivel] = useState(false);
+    const [qtdPaginas, setQtdPaginas] = useState();
+    const [preco, setPreco] = useState();
+    const [edicao, setEdicao] = useState("");
+    const idUsuario = storage("usuario-logado").id
+
+    async function cadastrarLivro() {
+        try{
+            
+            await CadastrarLivro({
+                nome: nome, 
+                autor: autor,
+                idioma: idioma,
+                edicao: edicao,
+                publicacao: publicacao,
+                sinopse: sinopse,
+                isbn: isbn,
+                qtdPaginas: qtdPaginas,
+                preco: preco,
+                editora: editora,
+                disponivel: disponivel
+            }, idUsuario)
+
+            toast.success("Livro cadastrado!");
+            limparCampos();
+
+        } catch(err) {
+            toast.error(err.response.data.erro)
+        }
+    }
+
+    function limparCampos() {
+        setNome("");
+        setAutor("");
+        setPublicacao("");
+        setIdioma("");
+        setEdicao("");
+        setEditora("");
+        setQtdPaginas("");
+        setPreco("");
+        setIsbn("");
+        setDisponivel(false);
+        setSinopse("");
+    }
+
+
     return(
         <div id="pag-cadastrar">
             <Menu menuSelecionado="cadastrar" />
             <div id="tela">
                 <Cabecalho />
                 <main>
-                    <form action="" method="post">
+                    <div id="form">
                         <div id="titulo">
                             <div></div>
                             <p>Cadastrar Novo Livro</p>
@@ -44,7 +89,12 @@ function Cadastrar() {
                                             <label htmlFor="">Nome: </label>
                                         </div>
                                         <div >
-                                            <input type="text" placeholder="Nome do Livro" />
+                                            <input 
+                                                type="text"
+                                                placeholder="Nome do Livro" 
+                                                value={nome}
+                                                onChange={(e) => setNome(e.target.value)}
+                                            />
                                         </div>
                                     </div>
                                     
@@ -53,7 +103,12 @@ function Cadastrar() {
                                             <label htmlFor="">Autor: </label>
                                         </div>
                                         <div >
-                                            <input type="text" placeholder="Nome do Autor"/>
+                                            <input 
+                                                type="text"
+                                                placeholder="Nome do Autor"
+                                                value={autor}
+                                                onChange={(e) => setAutor(e.target.value)}
+                                            />
                                         </div>
                                     </div>
 
@@ -62,8 +117,11 @@ function Cadastrar() {
                                             <label htmlFor="">Idioma: </label>
                                         </div>
                                         <div >
-                                            <select name="" id="">
-                                                <option value="">Selecione</option>
+                                            <select value={idioma} onChange={(e) => setIdioma(e.target.value)}>
+                                                <option value="" disabled={true}>Selecione</option>
+                                                <option value="Português"> Português </option>
+                                                <option value="Inglês"> Inglês </option>
+                                                <option value="Espanhol"> Espanhol </option>
                                             </select>
                                         </div>
                                     </div>
@@ -73,7 +131,12 @@ function Cadastrar() {
                                             <label htmlFor="">ISBN: </label>
                                         </div>
                                         <div >
-                                            <input type="text" placeholder="Número do ISBN"/>
+                                            <input 
+                                                type="number" 
+                                                placeholder="Número do ISBN"
+                                                value={isbn}
+                                                onChange={(e) => setIsbn(e.target.value)}
+                                            />
                                         </div>
                                     </div>
                                     
@@ -84,8 +147,13 @@ function Cadastrar() {
                                         <div  className="nomes-campos">
                                             <label htmlFor="">Qtd. Páginas: </label>                                
                                         </div>
-                                        <div >
-                                            <input type="text" placeholder="0"/>
+                                        <div>
+                                            <input 
+                                                type="number" 
+                                                placeholder={0}
+                                                value={qtdPaginas}
+                                                onChange={(e) => setQtdPaginas(e.target.value)}
+                                            />
                                         </div>
                                     </div>
 
@@ -94,13 +162,22 @@ function Cadastrar() {
                                             <label htmlFor="">Preço: </label>
                                         </div>
                                         <div >
-                                            <input type="text" placeholder="0"/>
+                                            <input 
+                                                type="number" 
+                                                placeholder="0"
+                                                value={preco}
+                                                onChange={(e) => setPreco(e.target.value)} 
+                                            />
                                         </div>
                                     </div>
 
                                     <div className="campo" id="campo-disponivel">
                                         <div className="nomes-campos" id="campo">
-                                            <input type="checkbox" />
+                                            <input 
+                                                type="checkbox"
+                                                checked={disponivel}
+                                                onChange={(e) => setDisponivel(e.target.checked)}
+                                            />
                                             <label htmlFor="">Disponível</label>
                                         </div>
                                     </div>
@@ -114,7 +191,12 @@ function Cadastrar() {
                                         <label htmlFor="">Editora: </label>
                                     </div>
                                     <div >
-                                        <input type="text" placeholder="Nome da Editora"/>
+                                        <input 
+                                            type="text" 
+                                            placeholder="Nome da Editora"
+                                            value={editora}
+                                            onChange={(e) => setEditora(e.target.value)}
+                                        />
                                     </div>
                                 </article>
                                 
@@ -123,7 +205,12 @@ function Cadastrar() {
                                         <label htmlFor="">Edição: </label>
                                     </div>
                                     <div >
-                                        <input type="text" placeholder="Versão da Edição" />
+                                        <input 
+                                            type="text" 
+                                            placeholder="Versão da Edição" 
+                                            value={edicao}
+                                            onChange={(e) => setEdicao(e.target.value)}
+                                        />
                                     </div>
                                 </article>
 
@@ -132,7 +219,11 @@ function Cadastrar() {
                                         <label htmlFor="">Publicação: </label>
                                     </div>
                                     <div >
-                                        <input type="date" name="" id="" />
+                                        <input 
+                                            type="date"
+                                            value={publicacao}
+                                            onChange={(e) => setPublicacao(e.target.value)} 
+                                        />
                                     </div>
                                 </article>
 
@@ -141,14 +232,19 @@ function Cadastrar() {
                                         <label htmlFor="">Sinopse: </label>
                                     </div>
                                     <div >
-                                        <textarea name="" id="" placeholder="Sinopse do livro"></textarea>
+                                        <textarea 
+                                            placeholder="Sinopse do livro"
+                                            value={sinopse}
+                                            onChange={(e) => setSinopse(e.target.value)}
+                                        >
+                                        </textarea>
                                     </div>
                                 </article>
                                 
-                                <button>SALVAR</button>
+                                <button onClick={cadastrarLivro}>SALVAR</button>
                             </section>
                         </div>
-                    </form>
+                    </div>
                 </main>
             </div>
         </div>
