@@ -1,9 +1,9 @@
 import Router from "express"; 
-import { cadastrarLivro, login } from "../repository/usuarioRepository.js";
-
+import { cadastrarImagemLivro, cadastrarLivro, login } from "../repository/usuarioRepository.js";
+import multer from "multer"
 
 const usuarioEndpoints = Router();
-
+const upload = multer({dest: "storage/capaLivro"})
 
 usuarioEndpoints.post('/usuario', async (req, resp) => {
     try{
@@ -24,7 +24,6 @@ usuarioEndpoints.post('/usuario', async (req, resp) => {
         })
     }
 })
-
 
 usuarioEndpoints.post("/livro", async (req, resp) => {
     try {
@@ -54,6 +53,27 @@ usuarioEndpoints.post("/livro", async (req, resp) => {
         })
     }
 })
+
+usuarioEndpoints.put("/livro/:id/imagem", upload.single("capa"), async (req, resp) => {
+    try{
+        if(!req.file) throw new Error("Imagem da capa não identificada.");
+        
+        const imagem = req.file.path;
+        const idUsuario = Number(req.params.id);
+        
+        if(!idUsuario || idUsuario < 1 || isNaN(idUsuario)) throw new Error("ID do usuário não identificado ou inválido.");
+        
+        const affectedRows = await cadastrarImagemLivro(imagem, idUsuario);
+        if(affectedRows != 1) throw new Error("Imagem da capa não podê ser cadastradas.");
+
+        resp.status(204).send();
+
+    } catch(err){
+        resp.status(400).send({
+            erro: err.message
+        }) 
+    }
+}) 
 
 
 export default usuarioEndpoints;
