@@ -3,7 +3,7 @@ import Cabecalho from "../../components/cabecalho";
 import Menu from "../../components/menu";
 import "./index.scss";
 import { toast } from "react-toastify"
-import { CadastrarLivro } from "../../api/usuarioApi";
+import { CadastrarImagemLivro, CadastrarLivro } from "../../api/usuarioApi";
 import storage from "local-storage"
 
 
@@ -22,30 +22,40 @@ function Cadastrar() {
     const [preco, setPreco] = useState();
     const [edicao, setEdicao] = useState("");
     const idUsuario = storage("usuario-logado").id
+    const [imagem, setImagem] = useState("");
 
     async function cadastrarLivro() {
         try{
-            
-            await CadastrarLivro({
-                nome: nome, 
-                autor: autor,
-                idioma: idioma,
-                edicao: edicao,
-                publicacao: publicacao,
-                sinopse: sinopse,
-                isbn: isbn,
-                qtdPaginas: qtdPaginas,
-                preco: preco,
-                editora: editora,
-                disponivel: disponivel
-            }, idUsuario)
+            if(!imagem) throw new Error("Imagem não selecionada.");
+
+            const infoLivro = await CadastrarLivro({
+                    nome: nome, 
+                    autor: autor,
+                    idioma: idioma,
+                    edicao: edicao,
+                    publicacao: publicacao,
+                    sinopse: sinopse,
+                    isbn: isbn,
+                    qtdPaginas: qtdPaginas,
+                    preco: preco,
+                    editora: editora,
+                    disponivel: disponivel
+                }, idUsuario)
+            await CadastrarImagemLivro(imagem, infoLivro.id)
 
             toast.success("Livro cadastrado!");
             limparCampos();
 
         } catch(err) {
-            toast.error(err.response.data.erro)
+            if(err.response)
+                toast.error(err.response.data.erro)
+            else
+                toast.error(err.message)
         }
+    }
+
+    function selecionarImagem() {
+        document.getElementById("inputFile").click();
     }
 
     function limparCampos() {
@@ -60,6 +70,7 @@ function Cadastrar() {
         setIsbn("");
         setDisponivel(false);
         setSinopse("");
+        setImagem("")
     }
 
 
@@ -76,9 +87,12 @@ function Cadastrar() {
                         </div>
                         <div id="campos">
                             <section id="s1">
-                                <div>
-                                    <input type="file" />
-                                    <img src="/assets/images/icon-upload.svg" alt="icon-upload" />
+                                <div onClick={selecionarImagem}>
+                                    <input type="file" id="inputFile" onChange={(e) => setImagem(e.target.files[0])}/>
+                                    {  imagem 
+                                        ? <img id="capa" src={URL.createObjectURL(imagem)} alt="icon-upload" /> 
+                                        : <img src="/assets/images/icon-upload.svg" alt="icon-upload" />
+                                    }
                                 </div>
                             </section>
 

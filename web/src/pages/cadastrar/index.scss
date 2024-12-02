@@ -108,6 +108,11 @@
                             width: 200px;
                             border: 2px solid #DFDFDF;
                             border-radius: 3px;
+                            
+                            #capa {
+                                width: 100%;
+                                height: 100%;
+                            }
 
                             input {
                                 display: none;

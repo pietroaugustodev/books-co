@@ -15,65 +15,6 @@ export async function Logar(email, senha){
     return resp.data;
 }
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 export async function CadastrarLivro(infoLivro, idUsuario){
     
     const resp = await api.post('/livro', {
@@ -93,3 +34,21 @@ export async function CadastrarLivro(infoLivro, idUsuario){
 
     return resp.data;
 }
+
+export async function CadastrarImagemLivro(imagem, idLivro){
+    
+    const formData = new FormData();
+    console.log(formData);
+    console.log(imagem);
+    
+    
+    formData.append('capa', imagem)
+    console.log(formData);
+    
+    
+    await api.put(`/livro/${idLivro}/imagem`, formData, {
+        headers: {
+            "Content-Type": "multipart/form-data",
+        }
+    })
+}    
