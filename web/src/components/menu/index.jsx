@@ -24,32 +24,35 @@ function Menu(props) {
 
     return(
         <div id="comp-menu">
-            <section id="info-empresa">
-                <img src="/assets/images/logo.png" alt="logo"/>
-                <h3>Books & Co.</h3>
-            </section>
+            <main>
+                <section id="info-empresa">
+                    <img src="/assets/images/logo.png" alt="logo"/>
+                    <h3>Books & Co.</h3>
+                </section>
 
-            <nav>
-                <Link to="/" id={verificarMenuSelecionado("home")}>
-                    <img src="/assets/images/icon-home.svg" alt="icon-home" />
-                    <p>Home</p>
-                </Link>
+                <nav>
+                    <Link to="/" id={verificarMenuSelecionado("home")}>
+                        <img src="/assets/images/icon-home.svg" alt="icon-home" />
+                        <p>Home</p>
+                    </Link>
 
-                <Link to="/cadastrar" id={verificarMenuSelecionado("cadastrar")}>
-                    <img src="/assets/images/icon-add.svg" alt="icon-add" />
-                    <p>Cadastrar</p>
-                </Link>
+                    <Link to="/cadastrar" id={verificarMenuSelecionado("cadastrar")}>
+                        <img src="/assets/images/icon-add.svg" alt="icon-add" />
+                        <p>Cadastrar</p>
+                    </Link>
 
-                <Link to="/consultar" id={verificarMenuSelecionado("consultar")}>
-                    <img src="/assets/images/icon-list.svg" alt="icon-list" />
-                    <p>Consultar</p>
-                </Link>
-            </nav>
+                    <Link to="/consultar" id={verificarMenuSelecionado("consultar")}>
+                        <img src="/assets/images/icon-list.svg" alt="icon-list" />
+                        <p>Consultar</p>
+                    </Link>
+                </nav>
 
-            <footer onClick={deslogar}>
-                <img src="/assets/images/icon-logout.svg" alt="icon-logout" />
-                <p>Sair</p>
-            </footer>
+                <footer onClick={deslogar}>
+                    <img src="/assets/images/icon-logout.svg" alt="icon-logout" />
+                    <p>Sair</p>
+                </footer>
+            </main>
+            <div></div>
         </div>
     )
 }

@@ -1,6 +1,6 @@
 import Cabecalho from "../../components/cabecalho";
 import Menu from "../../components/menu";
-
+import "./index.scss";
 
 
 function Consultar() {

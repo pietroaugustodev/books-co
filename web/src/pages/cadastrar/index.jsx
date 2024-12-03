@@ -9,7 +9,6 @@ import storage from "local-storage"
 
 function Cadastrar() {
     
-    const [img, setImg] = useState("");
     const [nome, setNome] = useState("");
     const [autor, setAutor] = useState("");
     const [idioma, setIdioma] = useState("");
@@ -23,6 +22,7 @@ function Cadastrar() {
     const [edicao, setEdicao] = useState("");
     const idUsuario = storage("usuario-logado").id
     const [imagem, setImagem] = useState("");
+
 
     async function cadastrarLivro() {
         try{
