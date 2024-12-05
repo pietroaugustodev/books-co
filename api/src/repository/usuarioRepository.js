@@ -14,22 +14,3 @@ export async function login(email, senha){
     
     return resp[0];
 }
-
-export async function cadastrarLivro(infoLivro) {
-    const comandoSql = `INSERT INTO tb_livro (id_usuario, nm_livro, nm_autor, ds_isbn, ds_editora, ds_edicao, ds_sinopse, dt_publicacao, ds_idioma, bt_disponivel, qtd_paginas, vl_preco)
-                               VALUES        (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?);`;
-
-    const [resp] = await conexao.query(comandoSql, [infoLivro.idUsuario, infoLivro.nome, infoLivro.autor, infoLivro.isbn, infoLivro.editora, infoLivro.edicao, infoLivro.sinopse, infoLivro.publicacao, infoLivro.idioma, infoLivro.disponivel, infoLivro.qtdPaginas, infoLivro.preco])
-
-    return resp.insertId;
-}
-
-export async function cadastrarImagemLivro(imagem, idLivro) {
-    const comandoSql = `UPDATE tb_livro
-                           SET img_capa = ?
-                         WHERE id_livro = ? ;`
-
-    const [resp] = await conexao.query(comandoSql, [imagem, idLivro]);
-
-    return resp.affectedRows;
-}

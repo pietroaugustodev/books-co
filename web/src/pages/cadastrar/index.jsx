@@ -3,7 +3,7 @@ import Cabecalho from "../../components/cabecalho";
 import Menu from "../../components/menu";
 import "./index.scss";
 import { toast } from "react-toastify"
-import { CadastrarImagemLivro, CadastrarLivro } from "../../api/usuarioApi";
+import { CadastrarImagemLivro, CadastrarLivro } from "../../api/livroApi.js";
 import storage from "local-storage"
 
 
