@@ -31,19 +31,30 @@ function Menu(props) {
                 </section>
 
                 <nav>
-                    <Link to="/" id={verificarMenuSelecionado("home")}>
+                    <Link className="funcoesMenu" to="/" id={verificarMenuSelecionado("home")}>
                         <img src="/assets/images/icon-home.svg" alt="icon-home" />
                         <p>Home</p>
                     </Link>
 
-                    <Link to="/cadastrar" id={verificarMenuSelecionado("cadastrar")}>
+                    <Link className="funcoesMenu" to="/cadastrar" id={verificarMenuSelecionado("cadastrar")}>
                         <img src="/assets/images/icon-add.svg" alt="icon-add" />
                         <p>Cadastrar</p>
                     </Link>
 
-                    <Link to="/consultar" id={verificarMenuSelecionado("consultar")}>
-                        <img src="/assets/images/icon-list.svg" alt="icon-list" />
-                        <p>Consultar</p>
+                    <Link to="/consultar" className="funcao-consultar">
+                        <div className="funcoesMenu" id={verificarMenuSelecionado("consultar")}>
+                            <img 
+                                src="/assets/images/icon-list.svg" 
+                                alt="icon-list" 
+                            />
+                            <p>Consultar</p>
+                        </div>
+                        <div className={props.menuSelecionado != "consultar" ? "consulta-selecionada" : ""}>
+                            <p> {`->`} Tabela</p>
+                        </div>
+                        <div className={props.menuSelecionado != "consultar" ? "consulta-selecionada" : ""}>
+                            <p> {`->`} Card</p>
+                        </div>
                     </Link>
                 </nav>
 
