@@ -49,9 +49,7 @@ export async function BuscarLivros() {
 }
 
 export async function BuscarLivro(busca) {
-    const resp = await api.get("/livros/livro", {
-        nome: busca
-    });
+    const resp = await api.get(`/livros/livro?nome=${busca}`);
 
     return resp.data;
 }

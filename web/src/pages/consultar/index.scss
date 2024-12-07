@@ -16,6 +16,10 @@
             padding: 80px 100px;
             gap: 80px;
 
+            img:hover {
+                cursor: pointer;
+            }
+
             section {
                 display: flex;
                 justify-content: center;

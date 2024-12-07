@@ -74,8 +74,8 @@ livroEndpoints.get("/livros", async (req, resp) => {
 livroEndpoints.get("/livros/livro", async (req, resp) => {
     try {
 
-        const nome = req.body.nome;
-
+        const nome = req.query.nome;
+        
         const resposta = await buscarLivroPorNome(nome);
 
         resp.send(resposta);

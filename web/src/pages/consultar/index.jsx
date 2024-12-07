@@ -26,11 +26,18 @@ function Consultar() {
         try {
 
             let resp = await BuscarLivro(buscaLivro);
+            console.log(resp);
+            
             setLivros(resp);
 
         } catch(err) {
             toast.error(err.response.data.erro)
         }
+    }
+
+    function verificarTecla(e) {
+        if(e.key == "Enter")
+            buscarLivro();
     }
 
     useEffect(() => {
@@ -44,7 +51,7 @@ function Consultar() {
                 <Cabecalho />
                 <main>
                     <section>
-                        <div>
+                        <div onKeyDown={verificarTecla}>
                             <input 
                                 type="text" 
                                 placeholder="Buscar livro pelo nome"
