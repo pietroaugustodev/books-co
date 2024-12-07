@@ -69,3 +69,13 @@ export async function buscarLivroPorNome(nome) {
 
     return resp;
 }
+
+export async function deletarLivro(idLivro) {
+    const comandoSql = `DELETE 
+                          FROM tb_livro
+                         WHERE id_livro = ?;`;
+
+    const [resp] = await conexao.query(comandoSql, [idLivro]);
+    
+    return resp.affectedRows;
+}

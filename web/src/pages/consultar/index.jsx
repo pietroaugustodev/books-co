@@ -26,7 +26,6 @@ function Consultar() {
         try {
 
             let resp = await BuscarLivro(buscaLivro);
-            console.log(resp);
             
             setLivros(resp);
 

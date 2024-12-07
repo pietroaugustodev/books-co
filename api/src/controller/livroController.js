@@ -1,6 +1,6 @@
 import { Router } from "express";
 import multer from "multer";
-import { buscarLivroPorNome, cadastrarImagemLivro, cadastrarLivro } from "../repository/livroRepository.js";
+import { buscarLivroPorNome, cadastrarImagemLivro, cadastrarLivro, deletarLivro } from "../repository/livroRepository.js";
 import { buscarLivros } from "../repository/livroRepository.js";
 
 const livroEndpoints = Router();
@@ -86,5 +86,24 @@ livroEndpoints.get("/livros/livro", async (req, resp) => {
         })
     }
 })
+
+livroEndpoints.delete("/livro/:id", async (req, resp) => {
+    try {
+
+        const id = Number(req.params.id);
+        
+        const affectedRows = await deletarLivro(id);
+        
+        if(affectedRows != 1) throw new Error ("O livro não pôde ser deletado.");
+
+        resp.status(204).send();
+
+    } catch(err) {
+        resp.status(400).send({
+            erro: err.message
+        })
+    }
+})
+
 
 export default livroEndpoints;
