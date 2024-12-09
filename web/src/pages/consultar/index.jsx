@@ -49,7 +49,7 @@ function Consultar() {
             <div id="tela">
                 <Cabecalho />
                 <main>
-                    <section>
+                    <section id="s-busca">
                         <div onKeyDown={verificarTecla}>
                             <input 
                                 type="text" 
@@ -63,7 +63,41 @@ function Consultar() {
                             />
                         </div>
                     </section>
-                    <table>
+
+                    <section id="s-cards">
+                        <article>
+                            <div>
+                                <img src="/assets/images/icon-alter.svg" alt="icon-alter" />
+                                <img src="/assets/images/icon-delete.svg" alt="icon-remove"/>
+                            </div>
+                            <div id="conteudo">
+                                <img src="/assets/images/capaDracula.jpg" alt="capa-livro" />
+                                <div>
+                                    <div>
+                                        <h4>Harry Potter e a Pedra filosofal</h4>
+                                        <p>por <b> JFK. Howling - Inglês - 259 págs. </b> </p>
+                                    </div>
+
+                                    <div id="preco">
+                                        <p> por apenas </p>
+                                        <div>
+                                            <h3> R$ 59,00 </h3>
+                                            <p>à vista </p>
+                                        </div>
+                                        <p>ou até 10x sem juros</p>
+                                    </div>
+                                    
+                                    <div>
+                                        <p>Lançamento: <b>22 maio de 2002 </b></p>
+                                        <p>Editora: <b>Vivendo </b></p>
+                                        <p>ISB: <b> 1234567899875522 </b> </p>
+                                    </div>
+                                </div>
+                            </div>
+                        </article>
+                    </section>
+
+                    {/* <table>
                         <div>
                             <thead>
                                 <th className="tamanhoPequeno id"> IDENTIFICAÇÃO </th>
@@ -90,7 +124,7 @@ function Consultar() {
                                 )
                             })}
                         </tbody>
-                    </table>
+                    </table> */}
                 </main>
             </div>
         </div>
