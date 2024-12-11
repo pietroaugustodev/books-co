@@ -3,7 +3,7 @@ import Cabecalho from "../../components/cabecalho";
 import Menu from "../../components/menu";
 import "./index.scss";
 import { toast } from "react-toastify";
-import { BuscarLivro, BuscarLivros } from "../../api/livroApi";
+import { BuscarImagemLivro, BuscarLivro, BuscarLivros } from "../../api/livroApi";
 
 
 function Consultar() {
@@ -43,36 +43,40 @@ function Consultar() {
     )
     const mostrarCard = () => (
         <section id="s-cards">
-            <article>
-                <div>
-                    <img src="/assets/images/icon-alter.svg" alt="icon-alter" />
-                    <img src="/assets/images/icon-delete.svg" alt="icon-remove"/>
-                </div>
-                <div id="conteudo">
-                    <img src="/assets/images/capaDracula.jpg" alt="capa-livro" />
-                    <div>
+            {livros.map((livro) => {
+                
+                return ( 
+                    <article>
                         <div>
-                            <h4>Harry Potter e a Pedra filosofal</h4>
-                            <p>por <b> JFK. Howling - Inglês - 259 págs. </b> </p>
+                            <img src="/assets/images/icon-alter.svg" alt="icon-alter" />
+                            <img src="/assets/images/icon-delete.svg" alt="icon-remove"/>
                         </div>
-
-                        <div id="preco">
-                            <p> por apenas </p>
+                        <div id="conteudo">
+                            <img src={livro.capa} alt="capa-livro" />
                             <div>
-                                <h3> R$ 59,00 </h3>
-                                <p>à vista </p>
+                                <div>
+                                    <h4>{livro.nome}</h4>
+                                    <p>por <b> {livro.autor} - {livro.idioma} - {livro.qtdPaginas} págs. </b> </p>
+                                </div>
+
+                                <div id="preco">
+                                    <p> por apenas </p>
+                                    <div>
+                                        <h3> R$ {livro.preco} </h3>
+                                        <p>à vista </p>
+                                    </div>
+                                    <p>ou até 10x sem juros</p>
+                                </div>
+                                
+                                <div>
+                                    <p>Lançamento: <b> {formatarData(livro.publicacao)} </b></p>
+                                    <p>Editora: <b>{livro.editora} </b></p>
+                                    <p>ISB: <b> {livro.isbn} </b> </p>
+                                </div>
                             </div>
-                            <p>ou até 10x sem juros</p>
                         </div>
-                        
-                        <div>
-                            <p>Lançamento: <b>22 maio de 2002 </b></p>
-                            <p>Editora: <b>Vivendo </b></p>
-                            <p>ISB: <b> 1234567899875522 </b> </p>
-                        </div>
-                    </div>
-                </div>
-            </article>
+                    </article>
+                )})}
         </section>
     )
 
@@ -81,11 +85,60 @@ function Consultar() {
         try {
 
             let resp = await BuscarLivros();
-            setLivros(resp);
+            
+            for(let c = 0; c < resp.length; c++)
+                resp[c].capa = BuscarImagemLivro(resp[c].capa);
+            
+            setLivros(resp)
 
         } catch(err) {
             toast.error(err)
         }
+    }
+
+    function formatarData(data) {
+        let mes = "";
+
+        switch(data.substring(5, 7)) {
+            case "1":
+                mes = "janeiro";
+                break;
+            case "2":
+                mes = "fevereiro";
+                break;
+            case "3":
+                mes = "março";
+                break;
+            case "4":
+                mes = "abril";
+                break;
+            case "5":
+                mes = "maio";
+                break;
+            case "6":
+                mes = "junho";
+                break;
+            case "7":
+                mes = "julho";
+                break;
+            case "8":
+                mes = "agosto";
+                break;
+            case "9":
+                mes = "setembro";
+                break;
+            case "10":
+                mes = "outubro";
+                break;
+            case "11":
+                mes = "novembro";
+                break;
+            case "12":
+                mes = "dezembro";
+                break;
+        }
+        
+        return `${data.substring(8, 10)} de ${mes} de ${data.substring(0, 4)}`;
     }
 
     async function buscarLivro() {

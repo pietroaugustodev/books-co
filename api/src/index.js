@@ -11,6 +11,7 @@ server.use(express.json())
 
 server.use(usuarioEndpoints)
 server.use(livroEndpoints)
+server.use('/storage/capaLivro', express.static('storage/capaLivro'));
 
 
 server.listen(process.env.PORT, () => console.log(`API subiu na port ${process.env.PORT}`));

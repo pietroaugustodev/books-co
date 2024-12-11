@@ -53,3 +53,7 @@ export async function BuscarLivro(busca) {
 
     return resp.data;
 }
+
+export function BuscarImagemLivro(imagem) {
+    return `${api.getUri()}/${imagem}`;
+}
