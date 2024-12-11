@@ -70,6 +70,9 @@ export async function buscarLivroPorNome(nome) {
     return resp;
 }
 
+
+// Deletando
+
 export async function deletarLivro(idLivro) {
     const comandoSql = `DELETE 
                           FROM tb_livro
@@ -77,5 +80,28 @@ export async function deletarLivro(idLivro) {
 
     const [resp] = await conexao.query(comandoSql, [idLivro]);
     
+    return resp.affectedRows;
+}
+
+
+// Alterando 
+
+export async function alterarLivro(infoLivro) {
+    const comandoSql = `UPDATE  tb_livro
+                           SET  nm_livro = ?,
+                                nm_autor = ?,
+                                ds_isbn = ?,
+                                ds_editora = ?,
+                                ds_edicao = ?,
+                                ds_sinopse = ?,
+                                dt_publicacao = ?,
+                                ds_idioma = ?,
+                                bt_disponivel = ?,
+                                qtd_paginas = ?,
+                                vl_preco = ?
+                         WHERE  id_livro = ?`;
+
+    const [resp] = await conexao.query(comandoSql, [infoLivro.nome, infoLivro.autor, infoLivro.isbn, infoLivro.editora, infoLivro.edicao, infoLivro.sinopse, infoLivro.publicacao, infoLivro.idioma, infoLivro.disponivel, infoLivro.qtdPaginas, infoLivro.preco, infoLivro.id]);
+
     return resp.affectedRows;
 }

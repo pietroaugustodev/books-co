@@ -1,6 +1,6 @@
 import { Router } from "express";
 import multer from "multer";
-import { buscarLivroPorNome, cadastrarImagemLivro, cadastrarLivro, deletarLivro } from "../repository/livroRepository.js";
+import { alterarLivro, buscarLivroPorNome, cadastrarImagemLivro, cadastrarLivro, deletarLivro } from "../repository/livroRepository.js";
 import { buscarLivros } from "../repository/livroRepository.js";
 
 const livroEndpoints = Router();
@@ -93,7 +93,7 @@ livroEndpoints.delete("/livro/:id", async (req, resp) => {
         const id = Number(req.params.id);
         
         const affectedRows = await deletarLivro(id);
-        
+
         if(affectedRows != 1) throw new Error ("O livro não pôde ser deletado.");
 
         resp.status(204).send();
@@ -104,6 +104,38 @@ livroEndpoints.delete("/livro/:id", async (req, resp) => {
         })
     }
 })
+
+livroEndpoints.put("/livro", async (req, resp) => {
+    try {
+        const infoLivro = req.body;
+
+        if(!infoLivro.id || isNaN(infoLivro.id)) throw new Error("Id do usuário não identificado.");
+        if(!infoLivro.nome) throw new Error("Nome do livro não identificado.");
+        if(!infoLivro.autor) throw new Error("Nome do autor não identificado.");
+        if(!infoLivro.isbn) throw new Error ("ISBN do livro não identificado.");
+        if(!infoLivro.editora) throw new Error ("Editora do livro não identificada.");
+        if(!infoLivro.edicao) throw new Error ("Edição do livro não identificada.");
+        if(!infoLivro.sinopse) throw new Error ("Sinopse do livro não identificada.");
+        if(!infoLivro.publicacao) throw new Error ("Data de publicação do livro não identificada.");
+        if(!infoLivro.idioma) throw new Error ("Idioma do livro não identificado.");
+        if(infoLivro.disponivel == undefined || infoLivro.disponivel == null) throw new Error ("Disponibilidade do livro não identificada.");
+        if(!infoLivro.qtdPaginas) throw new Error ("Quantidade de páginas não identificada.")
+        if(!infoLivro.preco) throw new Error ("Preço do livro não identificado.");
+
+        const affectedRows = await alterarLivro(infoLivro);
+
+        if(affectedRows != 1) throw new Error("Não foi possível alterar o livro");
+
+        resp.status(204).send();
+
+    } catch(err) {
+        resp.status(400).send({
+            erro: err.message
+        })
+    }
+
+})
+
 
 
 export default livroEndpoints;
