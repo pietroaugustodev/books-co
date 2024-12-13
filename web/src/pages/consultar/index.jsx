@@ -3,7 +3,7 @@ import Cabecalho from "../../components/cabecalho";
 import Menu from "../../components/menu";
 import "./index.scss";
 import { toast } from "react-toastify";
-import { BuscarImagemLivro, BuscarLivro, BuscarLivros } from "../../api/livroApi";
+import { BuscarImagemLivro, BuscarLivro, BuscarLivros, DeletarLivro } from "../../api/livroApi";
 
 
 function Consultar() {
@@ -33,7 +33,11 @@ function Consultar() {
                             <td className="campo-disponivel">{livro.disponivel == 1 ? "Sim" : "Não"}</td>
                             <div>
                                 <img src="/assets/images/icon-alter.svg" alt="icon-alter" />
-                                <img src="/assets/images/icon-delete.svg" alt="icon-delete" />
+                                <img 
+                                    src="/assets/images/icon-delete.svg" 
+                                    alt="icon-delete"
+                                    onClick={() => deletarLivro(livro)}
+                                />
                             </div>
                         </tr>
                     )
@@ -49,7 +53,11 @@ function Consultar() {
                     <article>
                         <div>
                             <img src="/assets/images/icon-alter.svg" alt="icon-alter" />
-                            <img src="/assets/images/icon-delete.svg" alt="icon-remove"/>
+                            <img 
+                                src="/assets/images/icon-delete.svg"
+                                alt="icon-remove"
+                                onClick={() => deletarLivro(livro)}    
+                            />
                         </div>
                         <div id="conteudo">
                             <img src={livro.capa} alt="capa-livro" />
@@ -80,6 +88,16 @@ function Consultar() {
         </section>
     )
 
+    async function deletarLivro(livro) {
+        try {
+            await DeletarLivro(livro.id);
+            toast.success(`O livro ${livro.nome} foi deletado com sucesso.`)
+            buscarLivros();
+
+        } catch(err){
+            toast.error(err.response.data.erro);
+        }
+    }
 
     async function buscarLivros() {
         try {

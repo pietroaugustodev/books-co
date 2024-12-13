@@ -57,3 +57,7 @@ export async function BuscarLivro(busca) {
 export function BuscarImagemLivro(imagem) {
     return `${api.getUri()}/${imagem}`;
 }
+
+export async function DeletarLivro(idLivro) {
+    await api.delete(`/livro/${idLivro}`);
+}
