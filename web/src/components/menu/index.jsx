@@ -51,13 +51,23 @@ function Menu(props) {
                         </div>
                         <div 
                             className={props.menuSelecionado != "consultar" ? "consulta-selecionada" : ""}
-                            onClick={() => props.formaConsultar("tabela")}    
+                            onClick={() => {
+                                props.formaConsultar("tabela")
+                                storage("info-app", {
+                                    formaConsulta: "tabela"
+                                })
+                            }}    
                         >
                             <p> {`->`} Tabela</p>
                         </div>
                         <div 
                             className={props.menuSelecionado != "consultar" ? "consulta-selecionada" : ""}
-                            onClick={() => props.formaConsultar("card")}    
+                            onClick={() => {
+                                props.formaConsultar("card")
+                                storage("info-app", {
+                                    formaConsulta: "card"
+                                })
+                            }}    
                         >
                             <p> {`->`} Card</p>
                         </div>

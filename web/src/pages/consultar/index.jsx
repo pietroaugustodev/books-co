@@ -6,12 +6,13 @@ import { toast } from "react-toastify";
 import { BuscarImagemLivro, BuscarLivro, BuscarLivros, DeletarLivro } from "../../api/livroApi";
 import { confirmAlert } from "react-confirm-alert"; 
 import { useNavigate } from "react-router-dom";
+import storage from "local-storage"
 
 function Consultar() {
     
     const [livros, setLivros] = useState([]);
     const [buscaLivro, setBuscaLivro] = useState("");
-    const [formaConsulta, setFormaConsulta] = useState("");
+    const [formaConsulta, setFormaConsulta] = useState(storage("info-app") ? storage("info-app").formaConsulta : "");
     const navigate = useNavigate();
     const mostrarTabela = () => (
         <table>
