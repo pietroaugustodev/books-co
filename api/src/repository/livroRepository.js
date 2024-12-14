@@ -70,6 +70,29 @@ export async function buscarLivroPorNome(nome) {
     return resp;
 }
 
+export async function BuscarLivroPorId(idLivro) {
+    const comandoSql = `SELECT  id_livro        AS id,
+                                id_usuario      AS idUsuario,
+                                nm_livro        AS nome,
+                                nm_autor        AS autor,
+                                dt_publicacao   AS publicacao,
+                                ds_sinopse      AS sinopse,
+                                ds_idioma       AS idioma,
+                                vl_preco        AS preco,
+                                img_capa        AS capa,
+                                qtd_paginas     AS qtdPaginas,
+                                bt_disponivel   AS disponivel,
+                                ds_isbn         AS isbn,
+                                ds_editora      AS editora,
+                                ds_edicao       AS edicao
+                          FROM  tb_livro
+                         WHERE  id_livro = ?;`;
+
+    const [resp] = await conexao.query(comandoSql, [idLivro]);
+
+    return resp[0];
+}
+
 
 // Deletando
 

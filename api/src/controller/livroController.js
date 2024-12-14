@@ -1,6 +1,6 @@
 import { Router } from "express";
 import multer from "multer";
-import { alterarLivro, buscarLivroPorNome, cadastrarImagemLivro, cadastrarLivro, deletarLivro } from "../repository/livroRepository.js";
+import { alterarLivro, BuscarLivroPorId, buscarLivroPorNome, cadastrarImagemLivro, cadastrarLivro, deletarLivro } from "../repository/livroRepository.js";
 import { buscarLivros } from "../repository/livroRepository.js";
 
 const livroEndpoints = Router();
@@ -77,6 +77,22 @@ livroEndpoints.get("/livros/livro", async (req, resp) => {
         const nome = req.query.nome;
         
         const resposta = await buscarLivroPorNome(nome);
+
+        resp.send(resposta);
+
+    } catch(err) {
+        resp.status(500).send({
+            erro: err.message
+        })
+    }
+})
+
+livroEndpoints.get("/livro/:id", async (req, resp) => {
+    try {
+
+        const { id } = req.params;
+
+        const resposta = await BuscarLivroPorId(id);
 
         resp.send(resposta);
 

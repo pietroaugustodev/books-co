@@ -4,13 +4,15 @@ import Menu from "../../components/menu";
 import "./index.scss";
 import { toast } from "react-toastify";
 import { BuscarImagemLivro, BuscarLivro, BuscarLivros, DeletarLivro } from "../../api/livroApi";
-
+import { confirmAlert } from "react-confirm-alert"; 
+import { useNavigate } from "react-router-dom";
 
 function Consultar() {
     
     const [livros, setLivros] = useState([]);
     const [buscaLivro, setBuscaLivro] = useState("");
     const [formaConsulta, setFormaConsulta] = useState("");
+    const navigate = useNavigate();
     const mostrarTabela = () => (
         <table>
             <div>
@@ -32,7 +34,11 @@ function Consultar() {
                             <td className="tamanhoPequeno">{new Date(livro.publicacao).toLocaleString("pt-BR").substring(0, 10)}</td>
                             <td className="campo-disponivel">{livro.disponivel == 1 ? "Sim" : "Não"}</td>
                             <div>
-                                <img src="/assets/images/icon-alter.svg" alt="icon-alter" />
+                                <img 
+                                    src="/assets/images/icon-alter.svg" 
+                                    alt="icon-alter" 
+                                    onClick={() => navigate(`/alterar/${livro.id}`)}
+                                />
                                 <img 
                                     src="/assets/images/icon-delete.svg" 
                                     alt="icon-delete"
@@ -52,7 +58,11 @@ function Consultar() {
                 return ( 
                     <article>
                         <div>
-                            <img src="/assets/images/icon-alter.svg" alt="icon-alter" />
+                            <img 
+                                src="/assets/images/icon-alter.svg" 
+                                alt="icon-alter" 
+                                onClick={() => navigate(`/alterar/${livro.id}`)}
+                            />
                             <img 
                                 src="/assets/images/icon-delete.svg"
                                 alt="icon-remove"
@@ -90,9 +100,24 @@ function Consultar() {
 
     async function deletarLivro(livro) {
         try {
-            await DeletarLivro(livro.id);
-            toast.success(`O livro ${livro.nome} foi deletado com sucesso.`)
-            buscarLivros();
+            confirmAlert({
+                title: "Deletar livro",
+                message: `Tem certeza que deseja deletar o livro "${livro.nome}"?`,
+                buttons: [
+                    {
+                        label: "Sim",
+                        onClick: async () => {
+                            await DeletarLivro(livro.id);
+                            toast.success(`O livro ${livro.nome} foi deletado com sucesso.`)
+                            buscarLivros();
+                        }
+                    },
+                    {
+                        label: "Não"
+                    }
+                    
+                ]
+            })
 
         } catch(err){
             toast.error(err.response.data.erro);
@@ -165,6 +190,9 @@ function Consultar() {
 
             let resp = await BuscarLivro(buscaLivro);
             
+            for(let cont = 0; cont < resp.length; cont++)
+                resp[cont].capa = BuscarImagemLivro(resp[cont].capa);
+
             setLivros(resp);
 
         } catch(err) {
@@ -183,7 +211,8 @@ function Consultar() {
     useEffect(() => {
         buscarLivros();
     }, [])
-    
+
+
     return(
         <div id="pag-consultar">
             <Menu menuSelecionado="consultar" formaConsultar={setFormaConsulta}/>

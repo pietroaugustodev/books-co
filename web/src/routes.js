@@ -13,6 +13,7 @@ function Rotas(){
                 <Route path="/" element={<Home />} />
                 <Route path="/cadastrar" element={<Cadastrar />} />
                 <Route path="/consultar" element={<Consultar />} />
+                <Route path="/alterar/:id" element={<Cadastrar />} />
                 <Route path="*" element={<NotFound />} />
             </Routes>
         </BrowserRouter>
