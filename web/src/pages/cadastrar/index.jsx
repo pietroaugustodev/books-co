@@ -1,10 +1,11 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import Cabecalho from "../../components/cabecalho";
 import Menu from "../../components/menu";
 import "./index.scss";
 import { toast } from "react-toastify"
-import { CadastrarImagemLivro, CadastrarLivro } from "../../api/livroApi.js";
+import { BuscarImagemLivro, BuscarLivroPorId, CadastrarImagemLivro, CadastrarLivro } from "../../api/livroApi.js";
 import storage from "local-storage"
+import { useParams } from "react-router-dom";
 
 
 function Cadastrar() {
@@ -22,7 +23,7 @@ function Cadastrar() {
     const [edicao, setEdicao] = useState("");
     const idUsuario = storage("usuario-logado").id
     const [imagem, setImagem] = useState("");
-
+    const { id } = useParams();
 
     async function cadastrarLivro() {
         try{
@@ -73,6 +74,42 @@ function Cadastrar() {
         setImagem("")
     }
 
+    function exibirImagem() {
+        if(typeof(imagem) == "object")
+            return URL.createObjectURL(imagem)
+        else {
+            return imagem
+        }
+
+    }
+
+    async function completarCampos() {
+        try {
+            const infoLivro = await BuscarLivroPorId(id);
+            console.log(infoLivro);
+            
+            setNome(infoLivro.nome);
+            setAutor(infoLivro.autor);
+            setIdioma(infoLivro.idioma);
+            setSinopse(infoLivro.sinopse);
+            setEdicao(infoLivro.edicao);
+            setDisponivel(infoLivro.disponivel);
+            setPublicacao(infoLivro.publicacao.substring(0, 10));
+            setQtdPaginas(infoLivro.qtdPaginas);
+            setPreco(infoLivro.preco);
+            setIsbn(infoLivro.isbn);
+            setEditora(infoLivro.editora);
+            setImagem(BuscarImagemLivro(infoLivro.capa));
+
+        } catch(err) {
+            toast.error(err.response.data.erro)
+        }
+    }
+
+    useEffect(() => {
+        if(id)
+            completarCampos();
+    }, [])
 
     return(
         <div id="pag-cadastrar">
@@ -90,7 +127,7 @@ function Cadastrar() {
                                 <div onClick={selecionarImagem}>
                                     <input type="file" id="inputFile" onChange={(e) => setImagem(e.target.files[0])}/>
                                     {  imagem 
-                                        ? <img id="capa" src={URL.createObjectURL(imagem)} alt="icon-upload" /> 
+                                        ? <img id="capa" src={exibirImagem()} alt="icon-upload" /> 
                                         : <img src="/assets/images/icon-upload.svg" alt="icon-upload" />
                                     }
                                 </div>
@@ -255,7 +292,7 @@ function Cadastrar() {
                                     </div>
                                 </article>
                                 
-                                <button onClick={cadastrarLivro}>SALVAR</button>
+                                <button onClick={cadastrarLivro}> {!id ? "Salvar" : "Alterar"}</button>
                             </section>
                         </div>
                     </div>

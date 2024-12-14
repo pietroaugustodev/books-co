@@ -61,3 +61,9 @@ export function BuscarImagemLivro(imagem) {
 export async function DeletarLivro(idLivro) {
     await api.delete(`/livro/${idLivro}`);
 }
+
+export async function BuscarLivroPorId(idLivro) {
+    const resp = await api.get(`/livro/${idLivro}`);
+
+    return resp.data;
+}
