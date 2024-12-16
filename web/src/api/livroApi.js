@@ -67,3 +67,22 @@ export async function BuscarLivroPorId(idLivro) {
 
     return resp.data;
 }
+
+export async function AlterarLivro(infoLivro) {
+    const resp = await api.put("/livro", {
+        editora: infoLivro.editora,
+        isbn: infoLivro.isbn,
+        edicao: infoLivro.edicao,
+        nome: infoLivro.nome,
+        sinopse: infoLivro.sinopse,
+        publicacao: infoLivro.publicacao,
+        id: infoLivro.id,
+        qtdPaginas: infoLivro.qtdPaginas,
+        autor: infoLivro.autor,
+        idioma: infoLivro.idioma,
+        preco: infoLivro.preco,
+        disponivel: infoLivro.disponivel
+    })
+
+    return resp.data;
+}

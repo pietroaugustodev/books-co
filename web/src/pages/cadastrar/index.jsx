@@ -3,9 +3,9 @@ import Cabecalho from "../../components/cabecalho";
 import Menu from "../../components/menu";
 import "./index.scss";
 import { toast } from "react-toastify"
-import { BuscarImagemLivro, BuscarLivroPorId, CadastrarImagemLivro, CadastrarLivro } from "../../api/livroApi.js";
+import { AlterarLivro, BuscarImagemLivro, BuscarLivroPorId, CadastrarImagemLivro, CadastrarLivro } from "../../api/livroApi.js";
 import storage from "local-storage"
-import { useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 
 
 function Cadastrar() {
@@ -24,12 +24,34 @@ function Cadastrar() {
     const idUsuario = storage("usuario-logado").id
     const [imagem, setImagem] = useState("");
     const { id } = useParams();
+    const navigate = useNavigate();
 
     async function cadastrarLivro() {
         try{
             if(!imagem) throw new Error("Imagem não selecionada.");
 
-            const infoLivro = await CadastrarLivro({
+            if(!id) {
+                let infoLivro = {
+                        nome: nome, 
+                        autor: autor,
+                        idioma: idioma,
+                        edicao: edicao,
+                        publicacao: publicacao,
+                        sinopse: sinopse,
+                        isbn: isbn,
+                        qtdPaginas: qtdPaginas,
+                        preco: preco,
+                        editora: editora,
+                        disponivel: disponivel
+                };
+                infoLivro.id = await CadastrarLivro(infoLivro, idUsuario)
+                await CadastrarImagemLivro(imagem, infoLivro.id)
+    
+                toast.success("Livro cadastrado!");
+                limparCampos();
+            } 
+            else {
+                const infoLivro = {
                     nome: nome, 
                     autor: autor,
                     idioma: idioma,
@@ -40,12 +62,21 @@ function Cadastrar() {
                     qtdPaginas: qtdPaginas,
                     preco: preco,
                     editora: editora,
-                    disponivel: disponivel
-                }, idUsuario)
-            await CadastrarImagemLivro(imagem, infoLivro.id)
+                    disponivel: disponivel,
+                    id: id
+                }
+                await AlterarLivro(infoLivro);
+                
+                if(typeof(imagem) == "object")
+                    await CadastrarImagemLivro(imagem, infoLivro.id)
 
-            toast.success("Livro cadastrado!");
-            limparCampos();
+                toast.success("Livro alterado com sucesso.");
+                
+                setTimeout(() => {
+                    navigate("/consultar");
+                }, 1500)
+            }
+            
 
         } catch(err) {
             if(err.response)
@@ -86,7 +117,6 @@ function Cadastrar() {
     async function completarCampos() {
         try {
             const infoLivro = await BuscarLivroPorId(id);
-            console.log(infoLivro);
             
             setNome(infoLivro.nome);
             setAutor(infoLivro.autor);
