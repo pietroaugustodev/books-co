@@ -11,7 +11,7 @@ livroEndpoints.post("/livro", async (req, resp) => {
     try {
 
         const infoLivro = req.body;
-
+        
         if(!infoLivro.idUsuario) throw new Error("Id do usuário não identificado.");
         if(!infoLivro.nome) throw new Error("Nome do livro não identificado.");
         if(!infoLivro.autor) throw new Error("Nome do autor não identificado.");
@@ -41,11 +41,11 @@ livroEndpoints.put("/livro/:id/imagem", upload.single("capa"), async (req, resp)
         if(!req.file) throw new Error("Imagem da capa não identificada.");
         
         const imagem = req.file.path;
-        const idUsuario = Number(req.params.id);
+        const idLivro = req.params.id;
+
+        if(!idLivro || idLivro < 1 || isNaN(idLivro)) throw new Error("ID do livro não identificado ou inválido.");
         
-        if(!idUsuario || idUsuario < 1 || isNaN(idUsuario)) throw new Error("ID do usuário não identificado ou inválido.");
-        
-        const affectedRows = await cadastrarImagemLivro(imagem, idUsuario);
+        const affectedRows = await cadastrarImagemLivro(imagem, idLivro);
         if(affectedRows != 1) throw new Error("Imagem da capa não podê ser cadastradas.");
 
         resp.status(204).send();

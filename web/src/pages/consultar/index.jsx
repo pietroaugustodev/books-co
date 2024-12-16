@@ -28,13 +28,13 @@ function Consultar() {
             <tbody>
                 {livros.map((livro) => {
                     return(
-                        <tr>
+                        <tr onClick={() => navigate(`/detalhes/${livro.id}`)}>
                             <td className="tamanhoPequeno id">#{livro.id}</td>
                             <td className="tamanhoGrande" >{livro.nome}</td>
                             <td className="tamanhoMedio">{livro.autor}</td>
                             <td className="tamanhoPequeno">{new Date(livro.publicacao).toLocaleString("pt-BR").substring(0, 10)}</td>
                             <td className="campo-disponivel">{livro.disponivel == 1 ? "Sim" : "Não"}</td>
-                            <div>
+                            <div className="acoes">
                                 <img 
                                     src="/assets/images/icon-alter.svg" 
                                     alt="icon-alter" 
@@ -58,7 +58,7 @@ function Consultar() {
                 
                 return ( 
                     <article>
-                        <div>
+                        <div className="acoes">
                             <img 
                                 src="/assets/images/icon-alter.svg" 
                                 alt="icon-alter" 
@@ -70,7 +70,7 @@ function Consultar() {
                                 onClick={() => deletarLivro(livro)}    
                             />
                         </div>
-                        <div id="conteudo">
+                        <div id="conteudo" onClick={() => navigate(`/detalhes/${livro.id}`)}>
                             <img src={livro.capa} alt="capa-livro" />
                             <div>
                                 <div>

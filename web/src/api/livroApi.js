@@ -20,22 +20,17 @@ export async function CadastrarLivro(infoLivro, idUsuario){
         edicao: infoLivro.edicao,
         idUsuario: idUsuario
     });
-
+    
     return resp.data;
 }
 
-export async function CadastrarImagemLivro(imagem, idLivro){
+export async function CadastrarImagemLivro(imagem, id){
     
+
     const formData = new FormData();
-    console.log(formData);
-    console.log(imagem);
-    
-    
     formData.append('capa', imagem)
-    console.log(formData);
     
-    
-    await api.put(`/livro/${idLivro}/imagem`, formData, {
+    await api.put(`/livro/${id}/imagem`, formData, {
         headers: {
             "Content-Type": "multipart/form-data",
         }

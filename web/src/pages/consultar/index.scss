@@ -16,15 +16,23 @@
             padding: 80px 80px;
             gap: 50px;
 
-            img:hover {
-                cursor: pointer;
+            
+            .acoes {
+                img:hover {
+                    cursor: pointer;
+                }
             }
+
 
             #s-busca {
                 display: flex;
                 justify-content: center;
                 width: 100%;
                 
+                img:hover {
+                    cursor: pointer;
+                }
+
                 div {
                     display: flex;
                     align-items: center;

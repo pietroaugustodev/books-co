@@ -44,7 +44,9 @@ function Cadastrar() {
                         editora: editora,
                         disponivel: disponivel
                 };
-                infoLivro.id = await CadastrarLivro(infoLivro, idUsuario)
+                const resp = await CadastrarLivro(infoLivro, idUsuario)
+                infoLivro.id = resp.id;
+
                 await CadastrarImagemLivro(imagem, infoLivro.id)
     
                 toast.success("Livro cadastrado!");
